@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('/fonts/moviestore.eot?gtmrv9');
+    src: url('/fonts/moviestore.eot?gtmrv9#iefix') format('embedded-opentype'),
+    url('/fonts/moviestore.ttf?gtmrv9') format('truetype'),
+    url('/fonts/moviestore.woff?gtmrv9') format('woff'),
+    url('/fonts/moviestore.svg?gtmrv9#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-price-tags:before {
+    content: "\e936";
+}
+
+.icon-cart:before {
+    content: "\e93a";
+}
+
+.icon-coin-dollar:before {
+    content: "\e93b";
+}
+
+.icon-credit-card:before {
+    content: "\e93f";
+}
+
+.navbar-pf .nav .nav-item-iconic .badge {
+    background-color: #1600cc;
+    border-radius: 20px;
+    color: #fff;
+    cursor: hand;
+    font-size: 9px;
+    font-weight: 700;
+    margin: 0 0 19px 1px;
+    min-width: 0;
+    padding: 2px 4px;
+}
+
+footer {
+    border-top: 1px solid #D5D5D5;
+    position: relative;
+    bottom: 0;
+    font-size: 10px;
+    left: 20px;
+    line-height: 15px;
+    padding-bottom: 28px;
+    padding-top: 28px;
+    width: calc(100% - 40px);
+}
+
+footer .social {
+    margin-top: 3px;
+    text-align: right;
+}
+
+footer .social {
+    clear: left;
+    list-style: none;
+    margin: 15px 0 0;
+    padding: 0;
+}
+
+footer #logo-redhat {
+    display: block;
+}
+
+footer #logo-redhat {
+    background: url(/img/redhat.svg) no-repeat;
+    float: left;
+    height: 34px;
+    margin: -3px 30px 0 0;
+    text-indent: -9999px;
+    width: 106px;
+}

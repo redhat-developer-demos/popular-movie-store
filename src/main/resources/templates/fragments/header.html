@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Popular Movie Store:: Canary Deployment on Kubernetes</title>
+  <!-- PatternFly Styles -->
+  <!-- Note: No other CSS files are needed regardless of what other JS packages located in patternfly/components that you decide to pull in -->
+  <link rel="stylesheet" href="/css/patternfly.min.css"/>
+  <link rel="stylesheet" href="/css/patternfly-additions.min.css"/>
+  <link rel="stylesheet" href="/css/moviestore.css"/>
+
+  <!-- Datatables, jQuery Grid Component -->
+  <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
+
+  <!-- jQuery -->
+  <script src="/js/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="/js/bootstrap.min.js"></script>
+
+  <script src="/js/jquery.dataTables.min.js"></script>
+  <script src="/js/dataTables.colVis.min.js"></script>
+  <script src="/js/dataTables.colReorder.js"></script>
+
+  <!-- PatternFly Custom Componets -  Sidebar, Popovers and Datatables Customizations -->
+  <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
+
+  <script src="/js/patternfly.min.js"></script>
+
+  <!-- Bootstrap Combobox -->
+  <script src="/js/bootstrap-combobox.js"></script>
+
+  <!-- Bootstrap Date Picker -->
+  <script src="/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- Moment - required by Bootstrap Date Time Picker -->
+  <script src="/js/moment.min.js"></script>
+
+  <!-- Bootstrap Date Time Picker - requires Moment -->
+  <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+  <!-- Bootstrap Select -->
+  <script src="/js/bootstrap-select.min.js"></script>
+
+  <!-- Bootstrap Switch -->
+  <script src="/js/bootstrap-switch.min.js"></script>
+
+  <!-- Bootstrap Touchspin -->
+  <script src="/js/jquery.bootstrap-touchspin.min.js"></script>
+
+  <!-- Bootstrap Tree View -->
+  <script src="/js/bootstrap-treeview.min.js"></script>
+
+  <!-- MatchHeight - Used to make sure dashboard cards are the same height -->
+  <script src="/js/jquery.matchHeight-min.js"></script>
+
+  <!-- Application Java Scripts -->
+
+  <script src="/js/moviestore.main.js"></script>
+
+</head>
+<body class="cards-pf">
+<nav class="navbar navbar-default navbar-pf">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+      <img src="/img/logo.png" alt="Popular Movie Store"/><span>Popular Movie Store</span>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-utility navbar-right navbar-iconic">
+      <li>
+        <a href="/cart/show" class="nav-item-iconic">
+          <span title="Notifications" class="fa icon-cart"></span>
+          <span id="cart-items-indicator" class="badge"
+                th:text="${cartCount==null?'0':cartCount}">0</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-primary">
+      <li><a href="/" class="active">Home</a></li>
+      <!-- More will come ... -->
+    </ul>
+  </div>
+</nav>
+</body>
+</html>

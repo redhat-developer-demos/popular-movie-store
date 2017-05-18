@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/header :: header}"></div>
+<body>
+<div class="container-fluid container-cards-pf">
+  <!-- Success Toast -->
+  <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-success alert-dismissable"
+       th:if="${orderStatus==1}">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      <span class="pficon pficon-close"></span>
+    </button>
+    <span class="pficon pficon-ok"></span>
+    Your order placed successfully. Thank you for shopping with us.
+  </div>
+
+  <!-- Failure Toast -->
+  <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-danger alert-dismissable"
+       th:if="${orderStatus == 0}">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      <span class="pficon pficon-close"></span>
+    </button>
+    <span class="pficon pficon-ok"></span>
+    Unable to place the order, Please try again later. Sorry for the inconvenience caused.
+  </div>
+
+  <div class="row row-cards-pf clearfix" id="content">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" th:each="movieCartItem : ${movies}">
+      <div class="card-pf card-pf-view">
+        <div class="card-pf-body">
+          <div class="card-pf-top-element">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <span class="fa"><img th:src="${movieCartItem.movie.posterPath}"/></span>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                  <span class="fa card-pf-title text-center"><h3
+                    th:text="${movieCartItem.movie.title}">Title</h3></span>
+              </div>
+            </div>
+          </div>
+          <div class="card-pf-items text-center">
+            <div class="card-pf-item">
+              <span class="icon-price-tags"></span>
+              <span class="card-pf-item-text">$</span>
+              <span
+                class="card-pf-item-text"
+                th:text="${#numbers.formatDecimal(movieCartItem.movie.price, 0, 'DEFAULT', 2, 'DEFAULT')}">$0.00</span>
+            </div>
+            <p role="separator" class="divider"></p>
+            <div class="card-pf-bottom-element">
+              <div class="form-group">
+                   <span>
+                     <label class="active" th:for="${#strings.concat(movieCartItem.movie.id,'--qty')}">Quantity</label>
+                     <input th:value="${movieCartItem.quantity}"
+                            th:id="${#strings.concat(movieCartItem.movie.id,'--qty')}"
+                            type="number"
+                            max="10"
+                            min="1"/>
+                   </span>
+                <span>
+                    <a id="addToCart" th:data="${movieCartItem.movie.id}" class="btn btn-primary add-to-cart">Add to Cart</a>
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:insert="~{fragments/footer :: footer}">&copy; 2017 Red Hat</div>
+</div>
+</body>
+</html>

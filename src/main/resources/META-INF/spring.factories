@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.workspace7.moviestore.thyemeleaf.ThymeleafConfiguration

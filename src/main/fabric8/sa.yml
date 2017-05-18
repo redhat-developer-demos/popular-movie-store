@@ -1,0 +1,6 @@
+# Name can inferred from the project but due to a bug
+# in 3.3.5 no empty descriptor is allowed. So we repeat the
+# info here
+---
+metadata:
+  name: "${project.artifactId}"

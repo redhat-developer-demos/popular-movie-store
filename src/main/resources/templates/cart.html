@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/header :: header}"></div>
+<body>
+<div class="container-fluid">
+
+  <h2>My Movies: </h2>
+  <form action="/cart/pay" method="post">
+    <div class="list-group list-view-pf">
+
+      <!-- START LIST ITEMS-->
+      <div class="list-group-item list-view-pf-stacked" th:each="cartItem : ${cartItems}">
+        <div class="list-view-pf-main-info">
+
+          <div class="list-view-pf-left">
+            <span class="fa"><img th:src="${cartItem.movie.logoPath}"/></span>
+          </div>
+
+          <div class="list-view-pf-body">
+            <div class="list-view-pf-description">
+              <div class="list-group-item-heading">
+                <h2 th:text="${cartItem.movie.title}">Movie Title</h2>
+              </div>
+              <div class="list-group-item-text">
+                <span th:text="${cartItem.movie.overview}">&nbsp;</span>
+              </div>
+            </div>
+
+            <div class="list-view-pf-additional-info">
+              <div class="list-view-pf-additional-info-item">
+                <span class="pficon pficon-image"></span>
+                <strong th:text="${cartItem.quantity}">0</strong>
+              </div>
+
+              <div class="list-view-pf-additional-info-item">
+                <span class="pficon icon-price-tags"></span>
+                <strong
+                  th:text="${#numbers.formatDecimal(cartItem.movie.price, 0, 'DEFAULT', 2, 'DEFAULT')}">0.00</strong>
+              </div>
+
+              <div class="list-view-pf-additional-info-item">
+                <span class="pficon icon-coin-dollar"></span>
+                <strong
+                  th:text="${#numbers.formatDecimal(cartItem.total, 0, 'DEFAULT', 2, 'DEFAULT')}">0.00</strong>
+              </div>
+            </div>
+
+          </div>
+          <!-- END LIST ITEMS-->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg4">
+          <span>&nbsp;</span>
+        </div>
+        <div class="col-md-3 pull-right">
+          <span><strong>Total:</strong></span>
+          <span class="label label-info"
+                th:text="${cartTotal}">Total:$10.00</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          &nbsp;
+        </div>
+        <div class="col-sm-4">
+          <p>
+            <button class="btn btn-primary btn-lg" role="button" type="submit"><strong>Proceed to pay</strong></button>
+          </p>
+        </div>
+        <div class="col-sm-4 pull-right">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+  </form>
+  <div th:insert="~{fragments/footer :: footer}">&copy; 2017 Red Hat</div>
+</div>
+</body>
+</html>

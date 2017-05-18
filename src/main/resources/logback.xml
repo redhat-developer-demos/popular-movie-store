@@ -1,0 +1,54 @@
+<configuration scan="true" scanPeriod="5 seconds">
+
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="org.workspace7.moviestore.controller" level="DEBUG" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <!-- SpringBoot -->
+  <logger name="org.springframework.boot.actuate.endpoint.mvc" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <!-- JGroups logging -->
+  <logger name="org.jgroups.protocols.pbcast" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.jgroups.protocols.TCP" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.jgroups.protocols.UNICAST" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.jgroups.protocols.UNICAST3" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.jgroups.protocols.kubernetes.KUBE_PING" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="org.jgroups.protocols.MERGE3" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <!-- Helps in watching the status good for dev -->
+  <logger name="org.jgroups.ping.kube" level="DEBUG" additivity="false">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </root>
+
+</configuration>

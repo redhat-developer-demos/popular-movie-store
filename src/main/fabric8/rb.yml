@@ -1,0 +1,7 @@
+roleRef:
+  name: view
+subjects:
+- kind: ServiceAccount
+  name: default
+- kind: ServiceAccount
+  name: ${project.artifactId}

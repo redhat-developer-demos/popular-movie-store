@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: List
+metadata: {}
+items:
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      pipeline.alpha.openshift.io/uses: '[{"name": "popular-movie-store", "namespace": "", "kind": "DeploymentConfig"},{"name": "popular-movie-store-canary", "namespace": "", "kind": "DeploymentConfig"}]'
+    name:  popular-movie-store-pipeline
+  spec:
+    source:
+      git:
+        uri: "https://github.com/kameshsampath/infinispan-demo-apps.git"
+      type: Git
+      contextDir: "popular-movie-store"
+    strategy:
+      type: JenkinsPipeline
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
+        env:
+          - name: "MAVEN_MIRROR_URL"
+            value: "http://192.168.64.1:8081/repository/maven-public/"
+    triggers:
+    - generic:
+        secret: infini5p@n
+      type: Generic

@@ -1,0 +1,57 @@
+---
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "${project.artifactId}-canary"
+spec:
+  replicas: ${replicas}
+  template:
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTIONS
+          value: "-Xms128m -Xmx512m -Djava.net.preferIPv4Stack=true"
+        - name: OPENSHIFT_KUBE_PING_LABELS
+          value: "project=${project.artifactId}"
+        - name: OPENSHIFT_KUBE_PING_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: "${project.artifactId}"
+              key: apiKey
+        name: "${project.artifactId}"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 8888
+          name: jgroups-cluster
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia-port
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            port: http
+            path: /healthz
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            port: http
+            path: /healthz
+          initialDelaySeconds: 30
+        volumeMounts:
+          - name: config
+            mountPath: /deployments/config
+      volumes:
+        - name: config
+          configMap:
+            name: ${project.artifactId}
+            items:
+            - key: application.yaml
+              path: application.yaml
+      serviceAccountName: "${project.artifactId}"
