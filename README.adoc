@@ -6,12 +6,12 @@ toc::[]
 
 == Overview
 
-This https://projects.spring.io/spring-boot/[Spring Boot] based application will demonstrate the the following,
+A simple https://projects.spring.io/spring-boot/[Spring Boot] based shopping cart application that will demonstrate,
 
-* Stateful application redeployments on https://kubernetes.io/[Kubernetes]/https://www.openshift.com/[OpenShift]jbo
-* Using http://infinispan.org/[Inifinispan] with https://projects.spring.io/spring-boot/[Spring Boot] for HTTP session caching
+* Stateful application re-deployments on https://kubernetes.io[Kubernetes] (or) https://www.openshift.com/[OpenShift]
+* Using http://infinispan.org/[Infinispan] with https://projects.spring.io/spring-boot/[Spring Boot] for HTTP session caching
 and management
-* Application state surviving across https://martinfowler.com/bliki/CanaryRelease.html[canary releases]
+* Seamless https://martinfowler.com/bliki/CanaryRelease.html[canary releases] with out the user loosing the state
 
 == Setup Local Kubernetes Cluster
 
@@ -27,7 +27,7 @@ The kubernetes cluster can be set locally using
 == Adding role to Service Account
 
 infinispan-cloud uses KUBE_PING to query the Kube API for nodes, pods and labels we need to add permissions, hence the
-service account assoicated with the deployment need to be added with the required roles to allow infinispan to query  kubernetes
+service account associated with the deployment need to be added with the required roles to allow infinispan to query  kubernetes
 API.
 
 This application uses a service account called *popular-movie-store* to run the pod, the service account
@@ -45,7 +45,7 @@ oc policy add-role-to-user view system:serviceaccount:$(oc project -q):popular-m
 <1> Adds view role to *default* service account
 <2> Adds view role to *popular-movie-store* service account
 
-Since we use fabric8 maven plugin we have automated this step, using the *rb.yml* resource
+Since we use fabric8 maven plugin we have automated this step, using the link:./src/main/fabric8/rb.yml[rb.yml] resource
 
 
 == API Key
@@ -60,6 +60,7 @@ Once you have the API key from https://www.themoviedb.org/documentation/api[them
 echo -n '<your-api-key>' | openssl base64
 ----
 
+[[app-deployment]]
 == Deploying
 
 Assuming you having a running Kubernetes cluster, execute the following command to deploy the application,
@@ -72,7 +73,7 @@ Assuming you having a running Kubernetes cluster, execute the following command 
 ----
 
 <1> The *fabric8:deploy* will trigger deployment of manifests in Kubernetes cluster
-<2> The application is configured with maven profile called *canary*, this will aid in doing
+<2> The application is configured with maven profile called *canary* link:./pom.xml[pom.xml], which aids in performing
 the https://martinfowler.com/bliki/CanaryRelease.html[Canary Releases]
 
 [TIP]
@@ -85,6 +86,7 @@ refreshed on every deployment, to avoid that just add `-Dfabric8.deploy.ignoreSe
 
 NOTE: The build will take some time for the very first deployment, as bunch of images needs to be pulled.
 
+[[accessing-app]]
 == Accessing the Application
 
 Once the application is deployed in Kubernetes you can access the application with one of the following ways
@@ -94,18 +96,22 @@ service popular-movie-store`
 
 (OR)
 
-If you are using `minishift` you can open the application in the browser using the command `minishift
-service popular-movie-store`
+If you are using `minishift` you can OpenShift console in the browser using the command `minishift
+console` and find the application url from the console refer to screenshot below
+
+[.right.text-center]
+image::OpenShift_Web_Console.png[Movie Store Service URL]
 
 ==== Sessions API
 
 The core idea of the demo is to see if my sessions stand with rolling upgrade of the applications, to know your current
-sessions you can access the url http://<kube-ip>:<nodePort/sessions, which will return the JSON of the currently active
-sessions
+sessions you can access the url http://<application-url>/sessions, which will return the JSON of the currently active
+sessions, where the application url is the same one from <<accessing-app>>
 
+[[app-undeploy]]
 == Undeploying
 
-To undeploy the application in:
+The application can be undeployed using the following <<tools,fabric8-maven-plugin>> goals,
 
 === Normal release
 
@@ -147,7 +153,7 @@ This demo application uses https://www.themoviedb.org[MovieDB] API for getting s
 
 == License
 
-Copyright 2017 Kamesh Sampath
+Copyright 2017 Red Hat
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
