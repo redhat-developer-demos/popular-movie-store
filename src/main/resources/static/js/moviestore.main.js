@@ -1,18 +1,29 @@
 $(document).ready(function () {
 
-    $("#added-to-cart-info").toggleClass("hidden"); //making sure its not shown by default
+    $("#invalid-qty").hide();
+    $("#added-to-cart-info").hide(); //making sure its not shown by default
 
     $('button.close').on('click', function () {
-        $("#added-to-cart-info").toggleClass("hidden");
+        var parentId = $(this).parent().get(0).getAttribute("id");
+        console.log("Parent " + parentId);
+        $('#' + parentId).hide();
     })
+
 
     $(".add-to-cart").click(function (event) {
         event.preventDefault();
-        addToCart(this.getAttribute('data'));
+        var movieId = this.getAttribute('data');
+        var qty = $('#' + movieId + '--qty').val();
+        if (qty > 0) {
+            addToCart(movieId, qty);
+        } else {
+            $("#added-to-cart-info").hide();
+            $("#invalid-qty").show();
+            $('#' + movieId + '--qty').focus();
+        }
     });
 
-    function addToCart(movieId) {
-        var qty = document.getElementById(movieId + '--qty').value;
+    function addToCart(movieId, qty) {
         console.log("Adding " + qty + " to movie " + movieId + " to cart");
         $.ajax({
             type: "GET",
@@ -21,12 +32,14 @@ $(document).ready(function () {
             success: function (data) {
                 console.log("Success : ", data);
                 $("#cart-items-indicator").text(data);
-                $("#added-to-cart-info").toggleClass("hidden");
+                $("#invalid-qty").hide();
+                $("#added-to-cart-info").show();
             },
             error: function (e) {
                 console.log("ERROR : ", e);
             }
         });
+
     }
 
 });

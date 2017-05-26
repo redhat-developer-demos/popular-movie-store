@@ -3,6 +3,14 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <body>
 
+<div id="invalid-qty" class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-danger alert-dismissable">
+  <button type="button" class="close" aria-hidden="true">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <span class="pficon pficon-error-circle-o"></span>
+  <strong>Hey there!</strong> You have'nt told me how much you want :( !!
+</div>
+
 <div id="added-to-cart-info" class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-info alert-dismissable">
   <button type="button" class="close" aria-hidden="true">
     <span class="pficon pficon-close"></span>
