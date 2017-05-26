@@ -2,6 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{fragments/header :: header}"></div>
 <body>
+
+<div id="invalid-qty" class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-danger alert-dismissable">
+  <button type="button" class="close" aria-hidden="true">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <span class="pficon pficon-error-circle-o"></span>
+  <strong>Hey there!</strong> You have'nt told me how much you want :( !!
+</div>
+
+<div id="added-to-cart-info" class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-info alert-dismissable">
+  <button type="button" class="close" aria-hidden="true">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <div class="pull-right toast-pf-action">
+    <a href="/cart/show">See your cart</a>
+  </div>
+  <span class="pficon pficon-info"></span>
+  <strong>Great!</strong> You have added a movie to your cart.
+</div>
+
 <div class="container-fluid container-cards-pf">
   <!-- Success Toast -->
   <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-success alert-dismissable"
@@ -58,7 +78,7 @@
                             min="1"/>
                    </span>
                 <span>
-                    <a id="addToCart" th:data="${movieCartItem.movie.id}" class="btn btn-primary add-to-cart">Add to Cart</a>
+                    <a th:data="${movieCartItem.movie.id}" class="btn btn-primary add-to-cart">Add to Cart</a>
                   </span>
               </div>
             </div>
