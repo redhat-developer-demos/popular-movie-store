@@ -71,7 +71,7 @@ public class HomeController {
         List<MovieCartItem> movieList = movies.stream()
             .map((Movie movie) -> MovieCartItem.builder()
                 .movie(movie)
-                .quantity(0)
+                .quantity(1)
                 .total(0)
                 .build())
             .collect(Collectors.toList());
@@ -103,6 +103,8 @@ public class HomeController {
                             if (movieItems.containsKey(movieId)) {
                                 int quantity = movieItems.get(movieId);
                                 movieCartItem.setQuantity(quantity);
+                            } else {
+                                movieCartItem.setQuantity(1);
                             }
                             return movieCartItem;
 
