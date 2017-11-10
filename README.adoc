@@ -126,6 +126,24 @@ The application can be undeployed using the following <<tools,fabric8-maven-plug
 ./mvnw -Pcanary -DapiKey=<api-key> fabric8:undeploy
 ```
 
+[[app-pipelines]]
+== Pipelines
+
+The application is enabled for OpenShit CI/CD via Jenkins. Fork your the project to your user id 
+and then,
+
+* Login to the OpenShift server using `oc login`, please make sure you login with user who can has 
+cluster admin role to enable creation of github secrets
+* From the Project root do `mvn fabric8:import`
+* You will now see the Buid Config for the project created in Github 
+* To get the GitHub webhook url run the command `oc describe bc/popular-moive-store`
+* Add the GitHub WebHook url displayed in https://developer.github.com/webhooks/[GitHub Web Hook] settings
+
+You are now all set to trigger the pipelines via GitHub pushes.
+
+NOTE: Automatic builds for GitHub will work only if the project is reachable via internet otherwise
+you need to start the builds manually
+
 == Utilities and Tools
 
 === Applications
