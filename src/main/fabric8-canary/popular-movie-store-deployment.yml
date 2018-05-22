@@ -12,7 +12,7 @@ spec:
         - name: JAVA_OPTIONS
           value: "-Xms128m -Xmx512m -Djava.net.preferIPv4Stack=true"
         - name: OPENSHIFT_KUBE_PING_LABELS
-          value: "project=${project.artifactId}"
+          value: "app=${project.artifactId}"
         - name: OPENSHIFT_KUBE_PING_NAMESPACE
           valueFrom:
             fieldRef:
@@ -36,12 +36,12 @@ spec:
           protocol: TCP
         livenessProbe:
           httpGet:
-            port: http
+            port: 8080
             path: /healthz
           initialDelaySeconds: 30
         readinessProbe:
           httpGet:
-            port: http
+            port: 8080
             path: /healthz
           initialDelaySeconds: 30
         volumeMounts:
