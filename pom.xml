@@ -20,7 +20,7 @@
     <lombok.version>1.16.16</lombok.version>
     <jgroups.stack.file>default-jgroups-kubernetes.xml</jgroups.stack.file>
     <maven.test.skip>true</maven.test.skip>
-    <fabric8-maven-plugin.version>3.5.33</fabric8-maven-plugin.version>
+    <fabric8-maven-plugin.version>3.5.38</fabric8-maven-plugin.version>
 
     <!-- application configuration -->
     <fabric8-maven-plugin.from.image>fabric8/s2i-java:2.0</fabric8-maven-plugin.from.image>
